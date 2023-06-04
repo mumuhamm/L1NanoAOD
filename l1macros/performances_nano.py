@@ -47,7 +47,7 @@ def main():
         elif args.channel == 'MuonJet':
             inputFile = '/user/lathomas/Public/L1Studies/MuJet.root'
         elif args.channel == 'ZToMuMu':
-            inputFile = '/user/lathomas/Public/L1Studies/ZToMuMu.root'
+            inputFile = '/eos/cms/store/data/Run2023B/Muon0/NANOAOD/PromptNanoAODv11p9_v1-v2/*/*.root'
         elif args.channel == 'ZToEE':
             inputFile = '/user/lathomas/Public/L1Studies/ZToEE.root'
 

@@ -1,12 +1,9 @@
 # Files
 executable = scriptcondor_performances_nano.sh
-#output = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).out
-#error = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).err
-#log = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).log
 output = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).out
 error = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).err
 log = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).log
-#arguments    = $(Process)
+arguments    = $(Process)
 
 
 transfer_input_files = $(filename)
@@ -15,11 +12,11 @@ arguments            = $(filename)  /afs/cern.ch/user/a/almuhamm/private/condorZ
 
 
 # File transfer behavior
-#should_transfer_files = no
-#when_to_transfer_output = ON_EXIT
+should_transfer_files = yes
+when_to_transfer_output = ON_EXIT
 
 # Resource requests
-#request_cpus   = 4
+request_cpus   = 4
 request_memory = 100MB
 request_disk   = 100MB
 
@@ -31,5 +28,4 @@ request_disk   = 100MB
 
 # Run job
 queue filename matching files  /eos/cms/store/data/Run2023B/Muon0/NANOAOD/PromptNanoAODv11p9_v1-v2/*/*.root
-
-#queue 100 
+queue 100 
