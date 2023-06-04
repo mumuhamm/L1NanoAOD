@@ -3,14 +3,14 @@ executable = scriptcondor_performances_nano.sh
 #output = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).out
 #error = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).err
 #log = /user/lathomas/PortingCodeToGitIIHECMS/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).log
-output = /user/hevard/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).out
-error = /user/hevard/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).err
-log = /user/hevard/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/log/scriptcondor_$(Process).log
+output = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).out
+error = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).err
+log = /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/log/scriptcondor_$(Process).log
 #arguments    = $(Process)
 
 
 transfer_input_files = $(filename)
-arguments            = $(filename)  /user/hevard/CMSSW_12_4_8/src/MacrosNtuples/l1macros/condorsubmission/OUTPUTDIR/output_$(Process).root CHANNEL
+arguments            = $(filename)  /afs/cern.ch/user/a/almuhamm/private/condorZMuMu/output_$(Process).root ZToMuMu
 
 
 
@@ -30,7 +30,6 @@ request_disk   = 100MB
 #+remote_queue = "osg"  # Request the OSG queue
 
 # Run job
-queue filename matching files FILENAMES
-
+queue filename matching files  /eos/cms/store/data/Run2023B/Muon0/NANOAOD/PromptNanoAODv11p9_v1-v2/*/*.root
 
 #queue 100 

@@ -1,13 +1,13 @@
 # Files
-executable = scriptcondor_rate.sh
-output = outputcondor_rate/log/scriptcondor_$(Process).out
-error = outputcondor_rate/log/scriptcondor_$(Process).err
-log = outputcondor_rate/log/scriptcondor_$(Process).log
+executable = scriptcondor_performances.sh 
+output = /eos/user/a/almuhamm/ZMu_Test/outNANOAOD/log/scriptcondor_$(Process).out
+error = /eos/user/a/almuhamm/ZMu_Test/outNANOAOD/log/scriptcondor_$(Process).err
+log = /eos/user/a/almuhamm/ZMu_Test/outNANOAOD/log/scriptcondor_$(Process).log
 #arguments    = $(Process)
 
 
 transfer_input_files = $(filename)
-arguments            = $(filename)  outputcondor_rate/output_$(Process).root ZeroBias
+arguments            = $(filename)  /eos/user/a/almuhamm/ZMu_Test/outNANOAOD/output_$(Process).root ZToMuMu
 
 
 # File transfer behavior
@@ -26,5 +26,4 @@ request_disk   = 100MB
 #+remote_queue = "osg"  # Request the OSG queue
 
 # Run job
-queue filename matching files /pnfs/iihe/cms/store/user/lathomas/*roBias*/Run2022G_PromptReco_v1_DataRun3_L1Studies_EphemeralZeroBias/230127_2*/0000/output_*.root /pnfs/iihe/cms/store/user/lathomas/*roBias*/Run2022F_PromptReco_v1_DataRun3_L1Studies_EphemeralZeroBias/230128*/0000/output_*.root
-
+queue filename matching files  /eos/cms/store/data/Run2023B/Muon0/NANOAOD/PromptNanoAODv11p9_v1-v2/*/*.root  

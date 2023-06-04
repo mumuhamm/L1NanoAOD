@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cd /user/hevard/CMSSW_12_4_8/src/
+cd /eos/user/a/almuhamm/02.TriggerEff/CMSSW_12_4_8/src/
 cmsenv 
-cd /user/hevard/CMSSW_12_4_8/src/MacrosNtuples/l1macros/
+cd /eos/user/a/almuhamm/02.TriggerEff/CMSSW_12_4_8/src/MacrosNtuples/l1macros/
 
 python3 performances_nano.py --max_events -1 -i $1 -o $2 -c $3
