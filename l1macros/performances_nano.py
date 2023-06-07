@@ -47,7 +47,7 @@ def main():
         elif args.channel == 'MuonJet':
             inputFile = '/user/lathomas/Public/L1Studies/MuJet.root'
         elif args.channel == 'ZToMuMu':
-            inputFile = '/eos/cms/store/data/Run2023B/Muon0/NANOAOD/PromptNanoAODv11p9_v1-v2/*/*.root'
+            inputFile = '/eos/cms/store/data/Run2023B/Muon1/NANOAOD/PromptNanoAODv11p9_v1-v2/2810000/*.root'
         elif args.channel == 'ZToEE':
             inputFile = '/user/lathomas/Public/L1Studies/ZToEE.root'
 
@@ -59,7 +59,7 @@ def main():
         elif args.channel == 'MuonJet':
             config_file = '../config_cards/full_MuonJet.yaml'
         elif args.channel == 'ZToMuMu':
-            config_file = '../config_cards/full_ZToMuMu.yaml'
+            config_file = '/afs/cern.ch/user/a/almuhamm/private/CMSSW_12_4_8/src/L1NanoAOD/config_cards/full_ZToMuMu.yaml'
         elif args.channel == 'ZToEE':
             config_file = '../config_cards/full_ZToEE.yaml'
 
@@ -84,9 +84,7 @@ def main():
 
     df = ROOT.RDataFrame('Events', inputFile)
     nEvents = df.Count().GetValue()
-
     print('There are {} events'.format(nEvents))
-    
     #Max events to run on 
     max_events = min(nEvents, args.max_events) if args.max_events >=0 else nEvents
     df = df.Range(0, max_events)
@@ -94,7 +92,7 @@ def main():
     df = df.Filter('if(tdfentry_ %100000 == 0) {cout << "Event is  " << tdfentry_ << endl;} return true;')
 
     #Apply MET filters
-    df = df.Filter('Flag_HBHENoiseFilter&&Flag_HBHENoiseIsoFilter&&Flag_goodVertices&&Flag_EcalDeadCellTriggerPrimitiveFilter&&Flag_BadPFMuonFilter&&Flag_BadPFMuonDzFilter')
+    #df = df.Filter('Flag_HBHENoiseFilter&&Flag_HBHENoiseIsoFilter&&Flag_goodVertices&&Flag_EcalDeadCellTriggerPrimitiveFilter&&Flag_BadPFMuonFilter&&Flag_BadPFMuonDzFilter')
 
     # binning for run number
     h.set_runnb_bins(df)
