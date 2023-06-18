@@ -12,11 +12,11 @@ using RNode = ROOT::RDF::RNode;
 int EventsToPrint = 0;
 
 double deltaphi_offlinemustation2_l1mu(int charge, double mupt, double mueta, double muphi, double l1muphi){
-    const double etaboundary_EMTF = 1.24;
+    const double etaboundary_OMTF = 0.83;
     const double Bfield = 3.8; //in Tesla
     const double Z_CSC_station2 = 8.2; //in meters
-    const double R_station2 =  (abs(mueta)<etaboundary_EMTF) ? 5 : abs(Z_CSC_station2*tan(2*atan(exp(-mueta)))); //in meters
-
+    const double R_station2 =  (abs(mueta)<etaboundary_OMTF) ? 5 : abs(Z_CSC_station2*tan(2*atan(exp(-mueta)))); //in meters
+    std::cout<< " The value of the R statsion :"<< R_station2 << "\n";
     double corr = asin(0.5*0.3*Bfield*R_station2/mupt); 
     double muphi_station2 = (charge<0)? muphi+corr : muphi-corr; 
     double dphi = muphi_station2-l1muphi; 
@@ -30,7 +30,7 @@ vector<int> FindL1ObjIdx(ROOT::VecOps::RVec<float>L1Obj_eta, ROOT::VecOps::RVec<
   vector <int> result={};
   for(unsigned int i = 0; i<recoObj_Eta.size(); i++){
     //double drmin = 0.4; 
-    double drmin = 0.6; 
+    double drmin = 0.2; 
     int idx = -1;
     for(unsigned int j = 0; j<L1Obj_eta.size(); j++){
 
@@ -55,7 +55,7 @@ vector<int> FindL1MuIdx(ROOT::VecOps::RVec<float>L1Obj_eta, ROOT::VecOps::RVec<f
   vector <int> result={};
   for(unsigned int i = 0; i<recoObj_Eta.size(); i++){
     //double drmin = 0.4; 
-    double drmin = 0.6; 
+    double drmin = 0.2; 
     int idx = -1;
     for(unsigned int j = 0; j<L1Obj_eta.size(); j++){
 
@@ -84,7 +84,7 @@ vector<int> FindL1MuIdx_setBx(ROOT::VecOps::RVec<float>L1Obj_eta, ROOT::VecOps::
   vector <int> result={};
   for(unsigned int i = 0; i<recoObj_Eta.size(); i++){
     //double drmin = 0.4; 
-    double drmin = 0.6; 
+    double drmin = 0.2; 
     int idx = -1;
     for(unsigned int j = 0; j<L1Obj_eta.size(); j++){
 
@@ -112,7 +112,7 @@ vector<int> FindL1ObjIdx_setBx(ROOT::VecOps::RVec<float>L1Obj_eta, ROOT::VecOps:
   vector <int> result={};
   for(unsigned int i = 0; i<recoObj_Eta.size(); i++){
     //double drmin = 0.4; 
-    double drmin = 0.6; 
+    double drmin = 0.2; 
     int idx = -1;
     for(unsigned int j = 0; j<L1Obj_eta.size(); j++){
 
@@ -372,12 +372,12 @@ ROOT::VecOps::RVec<int> charge_conversion(ROOT::VecOps::RVec<int>hwCharge){
 
 // Match L1Mu to TrigObj
 
-vector<int> MatchObjToTrig(ROOT::VecOps::RVec<float>Obj_eta, ROOT::VecOps::RVec<float>Obj_phi, ROOT::VecOps::RVec<float>TrigObj_pt, ROOT::VecOps::RVec<float>TrigObj_eta, ROOT::VecOps::RVec<float>TrigObj_phi, ROOT::VecOps::RVec<int>TrigObj_id, int Target_id){
+/*vector<int> MatchObjToTrig(ROOT::VecOps::RVec<float>Obj_eta, ROOT::VecOps::RVec<float>Obj_phi, ROOT::VecOps::RVec<float>TrigObj_pt, ROOT::VecOps::RVec<float>TrigObj_eta, ROOT::VecOps::RVec<float>TrigObj_phi, ROOT::VecOps::RVec<int>TrigObj_id, int Target_id){
 
   vector <int> result={};
   for(unsigned int i = 0; i<Obj_eta.size(); i++){
-    //double drmin = 0.4; 
-    double drmin = 0.6; 
+    //double drmin = 0.4;
+    double drmin = 0.7; 
     int idx = -1;
     for(unsigned int j = 0; j<TrigObj_eta.size(); j++){
       if (TrigObj_id[j] != Target_id) continue;
@@ -395,7 +395,7 @@ vector<int> MatchObjToTrig(ROOT::VecOps::RVec<float>Obj_eta, ROOT::VecOps::RVec<
   }
   return result;
 }
-
+*/
 // Recover triger decision from filterbit
 ROOT::VecOps::RVec <Bool_t> trig_is_filterbit1_set(ROOT::VecOps::RVec<int>Trig_idx, ROOT::VecOps::RVec<int>filterBits){
     vector <bool> result = {};

@@ -211,19 +211,29 @@ def ZEE_EleSelection(df):
 
 
 def ZMuMu_MuSelection(df):
-    '''
-    Selects Z->mumu events passing a single muon trigger. Defines probe pt/eta/phi
-    '''
+    
+   # Selects Z->mumu events passing a single muon trigger. Defines probe pt/eta/phi
+    
     df = df.Filter('HLT_IsoMu24')
 
-    df = df.Define('isTag','_lPt>25&&abs(_lpdgId)==13&&_lPassTightID&&_lpassHLT_IsoMu24')
-    df = df.Filter('Sum(isTag)>0')
-    df = df.Define('isProbe','_lPt>3&&abs(_lpdgId)==13&&_lPassTightID&& (Sum(isTag)>=2|| isTag==0)')
-    df = df.Filter('_mll>80&&_mll<100')
+    df = df.Define('L1Mu_charge', 'charge_conversion(L1Mu_hwCharge)')
 
-    df = df.Define('probe_Pt','_lPt[isProbe]')
-    df = df.Define('probe_Eta','_lEta[isProbe]')
-    df = df.Define('probe_Phi','_lPhi[isProbe]')
+    # TrigObj matching
+    df = df.Define('Muon_trig_idx', 'MatchObjToTrig(Muon_eta, Muon_phi, TrigObj_pt, TrigObj_eta, TrigObj_phi, TrigObj_id, 13)')
+    df = df.Define('Muon_passHLT_IsoMu24', 'trig_is_filterbit1_set(Muon_trig_idx, TrigObj_filterBits)')
+    df = df.Define('Muon_PassTightId','Muon_pfIsoId>=3&&Muon_mediumPromptId') 
+
+    df = df.Define('isTag','Muon_pt>25&&abs(Muon_pdgId)==13&&Muon_PassTightId&&Muon_passHLT_IsoMu24')
+    df = df.Filter('Sum(isTag)>0')
+
+    df = df.Define('isProbe','Muon_pt>3&&abs(Muon_pdgId)==13&&Muon_PassTightId&& (Sum(isTag)>=2|| isTag==0)')
+    df = df.Define('_mll', 'mll(Muon_pt, Muon_eta, Muon_phi, isTag, isProbe)')
+
+    df = df.Filter('_mll>70&&_mll<110')
+
+    df = df.Define('probe_Pt','Muon_pt[isProbe]')
+    df = df.Define('probe_Eta','Muon_eta[isProbe]')
+    df = df.Define('probe_Phi','Muon_phi[isProbe]')
     
     return df
 
@@ -405,7 +415,7 @@ def ZMuMu_Plots(df, suffix = ''):
         df_mu[i] = df_mu[i].Define('probePt30PassL1Mu22_Phi','probe_Phi[probe_Pt>30&&probe_L1Pt>22]')
         df_mu[i] = df_mu[i].Define('probePt30PassL1Mu22_L1Bx','probe_L1Bx[probe_Pt>30&&probe_L1Pt>22]')
 
-        histos['h_Mu22_EtaPhi_Denominator'+label[i]+suffix] = df_mu[i].Histo2D(ROOT.RDF.TH2DModel('h_Mu22_EtaPhi_Denominator'+suffix, '', 100, -5,5, 100, -3.1416, 3.1416), 'probePt30_Eta', 'probePt30_Phi')
+        histos['h_Mu22_EtaPhi_DeGetValnominator'+label[i]+suffix] = df_mu[i].Histo2D(ROOT.RDF.TH2DModel('h_Mu22_EtaPhi_Denominator'+suffix, '', 100, -5,5, 100, -3.1416, 3.1416), 'probePt30_Eta', 'probePt30_Phi')
         histos['h_Mu22_EtaPhi_Numerator'+label[i]+suffix] = df_mu[i].Histo2D(ROOT.RDF.TH2DModel('h_Mu22_EtaPhi_Numerator'+suffix, '', 100, -5,5, 100, -3.1416, 3.1416), 'probePt30PassL1Mu22_Eta', 'probePt30PassL1Mu22_Phi')
         
         

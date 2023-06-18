@@ -4,6 +4,11 @@ import sys
 import argparse
 import ctypes
 
+'''
+
+helper = ctypes.CDLL('./Helper.so')
+'''
+
 colors = [ROOT.kBlack, ROOT.kRed, ROOT.kBlue, ROOT.kOrange, ROOT.kMagenta, ROOT.kGreen+2, ROOT.kGray+1, ROOT.kCyan+2, ROOT.kYellow+2, ROOT.kOrange+2, ROOT.kCyan]
 #dirname = 'plotsL1Run3'
 
@@ -312,7 +317,7 @@ def compute_profilex(h2d):
         profiles.append(profile)
     
     return profiles
-
+'''
 def compute_ResolutionvsX(h2d):
     histos_response, histos_resol = [], []
     for ctr, h in enumerate(h2d):
@@ -340,6 +345,7 @@ def compute_ResolutionvsX(h2d):
         histos_resol.append(h_resolvsX)
         histos_response.append(h_responsevsX)
     return histos_response, histos_resol
+ '''   
 if __name__ == '__main__':
     main()
 

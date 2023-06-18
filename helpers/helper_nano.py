@@ -216,12 +216,8 @@ def ZEE_EleSelection(df):
 
 
 def ZMuMu_MuSelection(df):
-    '''
-    Selects Z->mumu events passing a single muon trigger. Defines probe pt/eta/phi
-    '''
-    df = df.Filter('HLT_IsoMu24')
-
-    # Trigged on a Muon (probably redondant)
+   
+    df = df.Filter('HLT_IsoMu27')
     df = df.Filter('''
     bool trigged_on_mu = false;
     for (unsigned int i = 0; i < TrigObj_id.size(); i++){
@@ -247,7 +243,7 @@ def ZMuMu_MuSelection(df):
     df = df.Define('isProbe','Muon_pt>3&&abs(Muon_pdgId)==13&&Muon_PassTightId&& (Sum(isTag)>=2|| isTag==0)')
     df = df.Define('_mll', 'mll(Muon_pt, Muon_eta, Muon_phi, isTag, isProbe)')
 
-    df = df.Filter('_mll>80&&_mll<100')
+    df = df.Filter('_mll>70&&_mll<110')
 
     df = df.Define('probe_Pt','Muon_pt[isProbe]')
     df = df.Define('probe_Eta','Muon_eta[isProbe]')

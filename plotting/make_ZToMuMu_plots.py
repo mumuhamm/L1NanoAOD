@@ -41,10 +41,10 @@ def main():
         eta_range = "eta{}to{}".format(region[0], region[1]).replace(".","p")
         eta_label = '{{{} #leq | #eta^{{#mu}}(reco)| < {}}}'.format(region[0], region[1])
 
-        #print(r)
-        #print(region)
-        #print(eta_range)
-        #print(eta_label)
+        print(r)
+        print(region)
+        print(eta_range)
+        print(eta_label)
 
         if config['Efficiency']:
 
@@ -77,7 +77,7 @@ def main():
                     xtitle = 'p_{T}^{#mu}(reco) (GeV)',
                     ytitle = 'Efficiency',
                     legendlabels = ['p_{{T}}^{{L1 #mu}} #geq {} GeV'.format(thr) for thr in config['Thresholds']],
-                    axisranges = [2, 500],
+                    axisranges = [2, 200],
                     extralabel = "#splitline{{Z#rightarrow#mu#mu, {}}}{}".format(label(qual), eta_label),
                     setlogx = True,
                     top_label = toplabel,
@@ -94,7 +94,7 @@ def main():
                     xtitle = 'p_{T}^{#mu}(reco) (GeV)',
                     ytitle = 'Efficiency',
                     legendlabels = ['p_{{T}}^{{L1 #mu}} #geq {} GeV'.format(thr) for thr in config['Thresholds']],
-                    axisranges = [2, 50],
+                    axisranges = [2, 100],
                     extralabel = "#splitline{{Z#rightarrow#mu#mu, {}}}{}".format(label(qual), eta_label),
                     setlogx = True,
                     top_label = toplabel,

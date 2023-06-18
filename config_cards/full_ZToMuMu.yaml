@@ -13,12 +13,12 @@ Regions:
     # label is the string inserted in histogram and plot names
     # low bound is the lowest value of abs(eta) for that region (inclusive)
     # high bound is the highest value of abs(eta) for that region (exclusive)
-    BMTF: [0.0, 0.83]
+    #BMTF: [0.0, 0.83]
     OMTF: [0.83, 1.24]
-    EMTF: [1.24, 2.4]
-    EMTF1: [1.24, 1.6]
-    EMTF2: [1.6, 2.1]
-    EMTF3: [2.1, 2.4]
+    #EMTF: [1.24, 2.4]
+    #EMTF1: [1.24, 1.6]
+    #EMTF2: [1.6, 2.1]
+    #EMTF3: [2.1, 2.4]
     AllEta: [0.0, 2.4]
 ### The thresholds to draw the turn-on of
 # Thresholds: [<thr 1>, <thr 2>, ...]
@@ -29,11 +29,11 @@ Thresholds: [3, 5, 10, 15, 20, 22, 26]
 # All the Turn On plots:
 TurnOns: true
 # Response vs Pt and vs Run Nb. These require the AllQual quality to be computed.
-Response: true
+Response: false
 # All the pre/post firing plots (vs Eta Phi, vs Eta, for Mu 10 to 21 and Mu 22)
-Prefiring: true
+Prefiring: false
 # Efficiency vs Run Nb and vs Eta Phi
-Efficiency: true
+Efficiency: false
 ### Settings for the plots in bins of nvtx
 PU_plots:
     # Whether or not to compute the histograms for each bin of nvtx.
@@ -50,7 +50,7 @@ PU_plots:
     # For each thr #, a turn on figure will be made, 
     # comparing the turn on of this threshold accross all bins of nvtx
     # For this to be possible, make_histos has to be set to true
-    draw_thresholds: [5]
+    draw_thresholds: [25]
 #
 #
 #
